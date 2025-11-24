@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import EventModal from "./EventModal";
 import "./Calendar.css";
-import emailjs from "emailjs-com";
 
 
 const Calendar = ({ events = [] }) => {
@@ -79,46 +78,18 @@ const Calendar = ({ events = [] }) => {
     setEditingEvent(null);
     setModalOpen(true);
   };
-const sendEmailNotification = (event) => {
-  emailjs.send(
-    "service_5tact1r",    
-    "__ejs-test-mail-service__",   
-    {
-      to_name: "Pooja",         
-      event_title: event.title,
-      event_date: event.date,
-      event_time: event.time,
-    },
-    "zTepswDtYxPGB0Z8Z"      
-  )
-  .then(() => {
-    console.log("Email sent successfully!");
-  })
-  .catch((err) => {
-    console.error("Email sending error:", err);
-  });
-};
 
   const handleSaveEvent = (payload) => {
-  const newEvent = editingEvent?.id
-    ? { ...editingEvent, ...payload }
-    : { ...payload, date: modalDate, id: Date.now() };
-
-  if (!editingEvent?.id) {
-    sendEmailNotification(newEvent);
-  }
-
-  if (editingEvent?.id) {
-    setEventList((prev) =>
-      prev.map((ev) => (ev.id === editingEvent.id ? newEvent : ev))
-    );
-  } else {
-    setEventList((prev) => [...prev, newEvent]);
-  }
-
-  setModalOpen(false);
-  setEditingEvent(null);
-};
+    if (editingEvent?.id) {
+      setEventList((prev) =>
+        prev.map((ev) => (ev.id === editingEvent.id ? { ...ev, ...payload } : ev))
+      );
+    } else {
+      setEventList((prev) => [...prev, { ...payload, date: modalDate, id: Date.now() }]);
+    }
+    setModalOpen(false);
+    setEditingEvent(null);
+  };
 
   const handleDeleteEvent = (evToDelete) => {
     setEventList((prev) => prev.filter((ev) => ev.id !== evToDelete.id));
