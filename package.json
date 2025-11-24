@@ -14,7 +14,6 @@
   "dependencies": {
     "canvas-confetti": "^1.9.4",
     "dayjs": "^1.11.19",
-    "emailjs-com": "^3.2.0",
     "react": "^19.2.0",
     "react-confetti": "^6.4.0",
     "react-dom": "^19.2.0"
