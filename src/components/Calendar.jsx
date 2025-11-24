@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import EventModal from "./EventModal";
 import "./Calendar.css";
+import emailjs from "emailjs-com";
+
 
 const Calendar = ({ events = [] }) => {
   const today = new Date();
@@ -77,18 +79,46 @@ const Calendar = ({ events = [] }) => {
     setEditingEvent(null);
     setModalOpen(true);
   };
+const sendEmailNotification = (event) => {
+  emailjs.send(
+    "YOUR_SERVICE_ID",    // replace with your EmailJS service ID
+    "YOUR_TEMPLATE_ID",   // replace with your EmailJS template ID
+    {
+      to_name: "Pooja",         // recipient name (can be dynamic)
+      event_title: event.title,
+      event_date: event.date,
+      event_time: event.time,
+    },
+    "YOUR_PUBLIC_KEY"      // replace with your EmailJS public key
+  )
+  .then(() => {
+    console.log("Email sent successfully!");
+  })
+  .catch((err) => {
+    console.error("Email sending error:", err);
+  });
+};
 
   const handleSaveEvent = (payload) => {
-    if (editingEvent?.id) {
-      setEventList((prev) =>
-        prev.map((ev) => (ev.id === editingEvent.id ? { ...ev, ...payload } : ev))
-      );
-    } else {
-      setEventList((prev) => [...prev, { ...payload, date: modalDate, id: Date.now() }]);
-    }
-    setModalOpen(false);
-    setEditingEvent(null);
-  };
+  const newEvent = editingEvent?.id
+    ? { ...editingEvent, ...payload }
+    : { ...payload, date: modalDate, id: Date.now() };
+
+  if (!editingEvent?.id) {
+    sendEmailNotification(newEvent);
+  }
+
+  if (editingEvent?.id) {
+    setEventList((prev) =>
+      prev.map((ev) => (ev.id === editingEvent.id ? newEvent : ev))
+    );
+  } else {
+    setEventList((prev) => [...prev, newEvent]);
+  }
+
+  setModalOpen(false);
+  setEditingEvent(null);
+};
 
   const handleDeleteEvent = (evToDelete) => {
     setEventList((prev) => prev.filter((ev) => ev.id !== evToDelete.id));
@@ -145,22 +175,6 @@ const Calendar = ({ events = [] }) => {
             <strong>{ev.title}</strong>
             <div style={{ fontSize: 12 }}>{ev.time}</div>
             <div style={{ fontSize: 12, color: "#666" }}>{ev.duration}</div>
-            <div style={{ marginTop: 6, display: "flex", gap: 8 }}>
-              <button
-                type="button"
-                onClick={() => { setEditingEvent(ev); setModalDate(ev.date); setModalOpen(true); }}
-                style={{ fontSize: 12 }}
-              >
-                Edit
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDeleteEvent(ev)}
-                style={{ color: "red", fontSize: 12 }}
-              >
-                Delete
-              </button>
-            </div>
           </div>
         ))}
 
@@ -188,9 +202,33 @@ const Calendar = ({ events = [] }) => {
         </div>
       )}
 
-      <div className="calendar-header">
+      {/* Calendar Header with Month & Year Dropdown */}
+      <div className="calendar-header" style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <button type="button" onClick={handlePrev}>Prev</button>
-        <h3>{currentDate.toLocaleString("default", { month: "long" })} {year}</h3>
+
+        {/* Month Dropdown */}
+        <select
+          value={currentDate.getMonth()}
+          onChange={(e) => setCurrentDate(new Date(currentDate.getFullYear(), Number(e.target.value), 1))}
+        >
+          {Array.from({ length: 12 }, (_, i) => (
+            <option key={i} value={i}>
+              {new Date(0, i).toLocaleString("default", { month: "long" })}
+            </option>
+          ))}
+        </select>
+
+        {/* Year Dropdown */}
+        <select
+          value={currentDate.getFullYear()}
+          onChange={(e) => setCurrentDate(new Date(Number(e.target.value), currentDate.getMonth(), 1))}
+        >
+          {Array.from({ length: 50 }, (_, i) => {
+            const y = new Date().getFullYear() - 25 + i; // ±25 years range
+            return <option key={y} value={y}>{y}</option>;
+          })}
+        </select>
+
         <button type="button" onClick={handleNext}>Next</button>
       </div>
 
@@ -218,10 +256,7 @@ const Calendar = ({ events = [] }) => {
               {dayEvents.map((ev, idx) => {
                 const color = eventColors[idx % eventColors.length];
                 return (
-                  <div
-                    key={ev.id}
-                    style={{ color, fontSize: 12, marginTop: 2 }}
-                  >
+                  <div key={ev.id} style={{ color, fontSize: 12, marginTop: 2 }}>
                     <strong>{ev.title}</strong>
                     <div style={{ fontSize: 11, color: "#555" }}>{ev.time}</div>
                     <div style={{ fontSize: 11, color: "#555" }}>{ev.duration}</div>
