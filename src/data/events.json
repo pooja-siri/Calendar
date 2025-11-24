@@ -1,0 +1,112 @@
+[
+  {
+    "title": "Team Meeting",
+    "date": "10-11-2025",
+    "time": "10:00 AM",
+    "duration": "1h"
+  },
+  {
+    "title": "Doctor Appointment",
+    "date": "10-11-2025",
+    "time": "3:00 PM",
+    "duration": "30m"
+  },
+  {
+    "title": "Birthday Party",
+    "date": "18-11-2025",
+    "time": "7:00 PM",
+    "duration": "2h"
+  },
+  {
+    "title": "Project Deadline",
+    "date": "20-11-2025",
+    "time": "11:59 PM",
+    "duration": "All day"
+  },
+  {
+    "title": "Client Call",
+    "date": "12-11-2025",
+    "time": "2:00 PM",
+    "duration": "1h"
+  },
+  {
+    "title": "Team Lunch",
+    "date": "15-11-2025",
+    "time": "1:00 PM",
+    "duration": "2h"
+  },
+  {
+    "title": "Workshop",
+    "date": "22-11-2025",
+    "time": "10:00 AM",
+    "duration": "3h"
+  },
+  {
+    "title": "Webinar",
+    "date": "25-11-2025",
+    "time": "4:00 PM",
+    "duration": "2h"
+  },
+
+  {
+    "title": "Planning Meeting",
+    "date": "28-10-2025",
+    "time": "11:00 AM",
+    "duration": "1h"
+  },
+  {
+    "title": "Code Review",
+    "date": "30-10-2025",
+    "time": "3:00 PM",
+    "duration": "2h"
+  },
+  {
+    "title": "Team Outing",
+    "date": "15-10-2025",
+    "time": "12:00 PM",
+    "duration": "4h"
+  },
+  {
+    "title": "Product Demo",
+    "date": "20-10-2025",
+    "time": "2:00 PM",
+    "duration": "1.5h"
+  },
+  {
+    "title": "Sprint Planning",
+    "date": "05-10-2025",
+    "time": "10:00 AM",
+    "duration": "2h"
+  },
+
+  {
+    "title": "Christmas Party",
+    "date": "24-12-2025",
+    "time": "7:00 PM",
+    "duration": "3h"
+  },
+  {
+    "title": "Year-End Review",
+    "date": "31-12-2025",
+    "time": "2:00 PM",
+    "duration": "2h"
+  },
+  {
+    "title": "New Project Kickoff",
+    "date": "05-12-2025",
+    "time": "11:00 AM",
+    "duration": "1.5h"
+  },
+  {
+    "title": "Client Presentation",
+    "date": "10-12-2025",
+    "time": "3:00 PM",
+    "duration": "2h"
+  },
+  {
+    "title": "Holiday Gathering",
+    "date": "20-12-2025",
+    "time": "6:00 PM",
+    "duration": "3h"
+  }
+]

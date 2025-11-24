@@ -1,0 +1,153 @@
+
+.calendar-container {
+  width: 95%;
+  max-width: 950px;
+  margin: 20px auto;
+  font-family: "Roboto", Arial, sans-serif;
+  color: #333;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.calendar-header h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #202124;
+}
+
+.calendar-header button {
+  background: #f1f3f4;
+  border: 1px solid #dadce0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.calendar-header button:hover {
+  background: #e8eaed;
+}
+
+.days-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #f8f9fa;
+  border-bottom: 1px solid #dadce0;
+}
+
+.day-name {
+  padding: 12px 0;
+  font-weight: 500;
+  color: #5f6368;
+  border-right: 1px solid #eee;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.day-name:last-child {
+  border-right: none;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-left: 1px solid #dadce0;
+  border-bottom: 1px solid #dadce0;
+}
+
+.empty-cell {
+  border-right: 1px solid #eee;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+.date-cell {
+  height: 90px;
+  border-right: 1px solid #eee;
+  border-top: 1px solid #eee;
+  padding: 6px 8px;
+  position: relative;
+  background: white;
+  transition: background 0.15s ease;
+  overflow-y: auto;
+}
+
+.date-cell:hover {
+  background: #f6f8fc;
+}
+
+.today {
+  background: #e8f0fe !important;
+  border: 2px solid #1a73e8 !important;
+}
+
+.date-number {
+  font-weight: 500;
+  color: #3c4043;
+  font-size: 14px;
+}
+
+.event-item {
+  background: #1a73e8;
+  margin-top: 5px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: white;
+  border-left: 4px solid #174ea6;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.event-item:hover {
+  opacity: 0.85;
+}
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+}
+
+.popup-box {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #202124;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 30px 50px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
