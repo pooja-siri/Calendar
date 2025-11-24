@@ -81,15 +81,15 @@ const Calendar = ({ events = [] }) => {
   };
 const sendEmailNotification = (event) => {
   emailjs.send(
-    "YOUR_SERVICE_ID",    // replace with your EmailJS service ID
-    "YOUR_TEMPLATE_ID",   // replace with your EmailJS template ID
+    "service_5tact1r",    
+    "__ejs-test-mail-service__",   
     {
-      to_name: "Pooja",         // recipient name (can be dynamic)
+      to_name: "Pooja",         
       event_title: event.title,
       event_date: event.date,
       event_time: event.time,
     },
-    "YOUR_PUBLIC_KEY"      // replace with your EmailJS public key
+    "zTepswDtYxPGB0Z8Z"      
   )
   .then(() => {
     console.log("Email sent successfully!");
